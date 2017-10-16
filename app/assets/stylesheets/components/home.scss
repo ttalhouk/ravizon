@@ -12,13 +12,16 @@
       left:0;
       bottom: 0;
       right: 0;
-      background-image:linear-gradient(rgba(76, 76, 76, 0.7),rgba(76, 76, 76, 0.7));
+      background-image:linear-gradient(rgba(76, 76, 76, 0.6),rgba(76, 76, 76, 0.6)),url("../images/ravio01.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
 
       &__title {
         text-align: center;
         font-size: $xl-font-size;
         padding: $large-space;
-        font-family: $lobster;
+        font-family: $modac;
         @include desktop{
           font-size: $hero-font-size;
         };
@@ -26,9 +29,9 @@
       &__tag-line {
         font-size: $base-font-size;
         padding: $large-space;
-        font-family: $lobster;
+        font-family: $modac;
         @include desktop{
-          font-size: $xl-font-size;
+          font-size: 160%;
         };
       }
     }

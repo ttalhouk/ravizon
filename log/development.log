@@ -42678,3 +42678,493 @@ Processing by ProductsController#show as HTML
 Completed 200 OK in 135ms (Views: 130.3ms | ActiveRecord: 1.9ms)
 
 
+Started POST "/orders" for 127.0.0.1 at 2017-10-15 20:56:55 -0700
+Processing by OrdersController#create as HTML
+  Parameters: {"authenticity_token"=>"1YgPLlnLecq1uVBmE5uCkIUbu1wE37a55xkUui5HNwoWE7wGAveo8v9aeu87wxKEnWENHWvtSO/L7ZuBP/KztQ==", "product"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "orders" WHERE "orders"."product_id" = $1 AND "orders"."user_id" = $2 AND "orders"."fulfilled" = $3 LIMIT $4[0m  [["product_id", 4], ["user_id", 5], ["fulfilled", "f"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://localhost:3000/products
+Completed 302 Found in 12ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 20:56:55 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.1ms)
+Completed 200 OK in 116ms (Views: 109.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/users/5/orders" for 127.0.0.1 at 2017-10-15 20:56:57 -0700
+Processing by OrdersController#index as HTML
+  Parameters: {"user_id"=>"5"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 ORDER BY "orders"."id" ASC[0m  [["user_id", 5]]
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" INNER JOIN "orders" ON "products"."id" = "orders"."product_id" WHERE "orders"."user_id" = $1[0m  [["user_id", 5]]
+  Rendered orders/index.html.erb within layouts/application (15.3ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (5.3ms)
+Completed 200 OK in 126ms (Views: 118.8ms | ActiveRecord: 1.8ms)
+
+
+Started PATCH "/users/5/orders/84" for 127.0.0.1 at 2017-10-15 20:57:01 -0700
+Processing by OrdersController#update as JSON
+  Parameters: {"order"=>{"qty"=>"2"}, "user_id"=>"5", "id"=>"84"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT  "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND "orders"."id" = $2 LIMIT $3[0m  [["user_id", 5], ["id", 84], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND "orders"."id" = $2 LIMIT $3[0m  [["user_id", 5], ["id", 84], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mOrder Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "orders" WHERE "orders"."product_id" = $1 AND ("orders"."id" != $2) AND "orders"."user_id" = $3 AND "orders"."fulfilled" = $4 LIMIT $5[0m  [["product_id", 4], ["id", 84], ["user_id", 5], ["fulfilled", "f"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "orders" SET "qty" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["qty", 2], ["updated_at", "2017-10-16 03:57:01.110219"], ["id", 84]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 14ms (Views: 0.5ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/users/5/orders/cart" for 127.0.0.1 at 2017-10-15 20:57:08 -0700
+Processing by OrdersController#cart as HTML
+  Parameters: {"user_id"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled = 'f')[0m  [["user_id", 5]]
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering orders/cart.html.erb within layouts/application
+  Rendered orders/cart.html.erb within layouts/application (7.6ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (3.6ms)
+Completed 200 OK in 105ms (Views: 95.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/users/5/orders/cart" for 127.0.0.1 at 2017-10-15 20:57:53 -0700
+Processing by OrdersController#cart as HTML
+  Parameters: {"user_id"=>"5"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled = 'f')[0m  [["user_id", 5]]
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering orders/cart.html.erb within layouts/application
+  Rendered orders/cart.html.erb within layouts/application (4.8ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (4.9ms)
+Completed 200 OK in 138ms (Views: 118.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/users/5/orders/cart" for 127.0.0.1 at 2017-10-15 20:58:06 -0700
+Processing by OrdersController#cart as HTML
+  Parameters: {"user_id"=>"5"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled = 'f')[0m  [["user_id", 5]]
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering orders/cart.html.erb within layouts/application
+  Rendered orders/cart.html.erb within layouts/application (3.3ms)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (5.3ms)
+Completed 200 OK in 119ms (Views: 111.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/users/5/orders/cart" for 127.0.0.1 at 2017-10-15 20:58:31 -0700
+Processing by OrdersController#cart as HTML
+  Parameters: {"user_id"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled = 'f')[0m  [["user_id", 5]]
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering orders/cart.html.erb within layouts/application
+  Rendered orders/cart.html.erb within layouts/application (2.5ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (3.5ms)
+Completed 200 OK in 153ms (Views: 144.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 20:58:38 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (1.6ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (6.6ms)
+Completed 200 OK in 141ms (Views: 131.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 21:07:50 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (6.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (8.3ms)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (14.4ms)
+Completed 200 OK in 820ms (Views: 788.7ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:07:56 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.9ms)
+Completed 200 OK in 153ms (Views: 146.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:09:04 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (37.7ms)
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (13.4ms)
+Completed 200 OK in 2085ms (Views: 1998.2ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:11:34 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (70.3ms)
+  [1m[36mUser Load (54.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (75.4ms)
+Completed 200 OK in 2433ms (Views: 2150.0ms | ActiveRecord: 55.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:13:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.2ms)
+Completed 200 OK in 414ms (Views: 410.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 21:13:23 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (4.8ms)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.6ms)
+Completed 200 OK in 126ms (Views: 112.2ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:20:19 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.2ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (10.5ms)
+Completed 200 OK in 490ms (Views: 484.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:20:20 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.6ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (9.4ms)
+Completed 200 OK in 166ms (Views: 161.0ms | ActiveRecord: 1.4ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/public/ravio01.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:20:24 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (10.1ms)
+Completed 200 OK in 136ms (Views: 131.7ms | ActiveRecord: 1.7ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/public/ravio01.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:22:10 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (6.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.5ms)
+Completed 200 OK in 495ms (Views: 480.6ms | ActiveRecord: 1.3ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/ravio01.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.0.4) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.0.4) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:23:07 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (10.5ms)
+Completed 200 OK in 430ms (Views: 425.4ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:24:06 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.6ms)
+Completed 200 OK in 625ms (Views: 620.3ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:24:25 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (5.1ms)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.3ms)
+Completed 200 OK in 508ms (Views: 502.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:24:41 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.3ms)
+Completed 200 OK in 576ms (Views: 571.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:27:13 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (5.5ms)
+Completed 200 OK in 370ms (Views: 367.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:27:29 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (5.2ms)
+Completed 200 OK in 389ms (Views: 385.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:27:44 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.9ms)
+Completed 200 OK in 497ms (Views: 492.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:28:12 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (5.3ms)
+Completed 200 OK in 489ms (Views: 485.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:29:13 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (7.8ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (9.1ms)
+Completed 200 OK in 536ms (Views: 525.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:29:18 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (2.1ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.3ms)
+Completed 200 OK in 161ms (Views: 155.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:30:05 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (8.3ms)
+Completed 200 OK in 392ms (Views: 387.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:31:44 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.9ms)
+Completed 200 OK in 349ms (Views: 345.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 21:33:12 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (4.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (2.9ms)
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (10.3ms)
+Completed 200 OK in 409ms (Views: 392.8ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 21:33:13 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (4.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (6.8ms)
+Completed 200 OK in 143ms (Views: 133.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:33:21 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (6.5ms)
+Completed 200 OK in 126ms (Views: 122.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-15 21:34:59 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.7ms)
+Completed 200 OK in 120ms (Views: 116.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2017-10-15 21:35:04 -0700
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."user_id" = $1 AND (fulfilled ='f')[0m  [["user_id", 5]]
+  Rendered shared/_navbar.html.erb (7.5ms)
+Completed 200 OK in 130ms (Views: 121.0ms | ActiveRecord: 2.0ms)
+
+

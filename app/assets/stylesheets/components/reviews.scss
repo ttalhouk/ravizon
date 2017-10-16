@@ -43,7 +43,7 @@
         align-items: flex-start;
         justify-content: flex-start;
       };
-      border: 2px solid $pink;
+      border: 2px solid $ravio;
       padding: $space;
       margin: $space;
       label {
@@ -94,11 +94,11 @@
 }
 .review--star {
   font-size: $xl-font-size;
-  color: $pink;
+  color: $ravio;
 }
 
 .review-list{
-  border-top: 3px solid $pink;
+  border-top: 3px solid $ravio;
   &--item{
     padding: $space;
     &__title {
@@ -108,11 +108,11 @@
       font-style: italic;
     }
     &__stars {
-      color: $pink;
+      color: $ravio;
       font-size: 2rem;
     }
     &__review {
-      border-left: 2px solid $pink;
+      border-left: 2px solid $ravio;
       margin: $space;
       padding:$space;
     }

@@ -16,7 +16,7 @@
 }
 
 .navbar {
-  background-color: transparentize(darken($pink, .2), .1);
+  background-color: transparentize(darken($ravio, .2), .1);
   color: $nav-font-color;
 
   position: fixed;
@@ -28,7 +28,7 @@
   transition: left .3s ease-in-out;
 
   &--title {
-    font-family: $lobster, $site-font-default;
+    font-family: $modac, $site-font-default;
     font-size: $xl-font-size;
     padding: $space 0 $space $large-space;
     text-align: center;

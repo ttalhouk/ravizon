@@ -36,7 +36,7 @@
     width: 100%;
     margin-bottom: $space;
     & input{
-      border: 1px solid $pink;
+      border: 1px solid $ravio;
       border-radius: 1rem;
       width: 60%;
       @include desktop{
@@ -61,7 +61,7 @@
     margin-bottom: $space;
   }
   &--links {
-    border-top: 1px solid $pink;
+    border-top: 1px solid $ravio;
     @include vert-space-flex;
     height: 50%;
     * {
