@@ -31,7 +31,7 @@
   <%= react_component 'ReviewList', {
     product: @product,
     user: current_user,
-    reviews: @product.reviews
+    reviews: get_reviews(@product)
     }%>
     <!-- need to get review creater name not current user -->
 </div>

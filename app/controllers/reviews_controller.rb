@@ -3,7 +3,16 @@ class ReviewsController < ApplicationController
   before_action :get_product
 
   def index
-    @reviews = @product.reviews
+    product_reviews = @product.reviews
+    @reviews = product_reviews.map do |review|
+      return {
+        title: review.title,
+        body: review.body,
+        updated_at: review.updated_at,
+        reviewer: review.user.first_name
+      }
+    end
+    p @reviews
   end
 
   def create

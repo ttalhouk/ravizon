@@ -21,7 +21,7 @@ class Review extends React.Component {
           {this.props.review.body}
         </blockquote>
         <p className="review-list--item__username">
-          - {this.props.user.first_name ? this.props.user.first_name: 'Anonymous'}
+          - {this.props.reviewer ? this.props.reviewer : 'Anonymous'}
         </p>
         <span className="review-list--item__timestamp">
           ({moment(this.props.review.updated_at).format("dddd, MMMM Do YYYY")})</span>
@@ -32,5 +32,5 @@ class Review extends React.Component {
 
 Review.propTypes = {
   review: React.PropTypes.object,
-  user: React.PropTypes.object
+  user: React.PropTypes.string
 };

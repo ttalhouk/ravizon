@@ -25,7 +25,9 @@ class ReviewList extends React.Component {
       .success((data) => {
         // this.props.updateMessage({success: `review successfully added`})
         console.log(data);
-        this.setState({reviews: [data.review].concat(this.state.reviews)})
+        review = data.review;
+        review['reviewer'] = this.props.user.first_name
+        this.setState({reviews: [review].concat(this.state.reviews)})
         this.handleOpenForm();
       })
       .error((err) => {
@@ -40,7 +42,7 @@ class ReviewList extends React.Component {
   renderReviews() {
     return this.state.reviews.map((review) => {
       return(
-        <Review key={review.id} review={review} user={this.props.user} />
+        <Review key={review.id} review={review} reviewer={review.reviewer} />
       );
     });
   }
@@ -59,7 +61,7 @@ class ReviewList extends React.Component {
   }
 
   renderReviewButton(){
-    if (this.props.user.email) {
+    if (this.props.user) {
       return (
         <button
           onClick={this.handleOpenForm.bind(this)}
