@@ -1,0 +1,38 @@
+<nav>
+  <div class="sidebar-nav-button closed">
+    <i class="ion-navicon-round"></i>
+  </div>
+  <div class="navbar">
+    <h1 class="navbar--title">
+      <%= link_to root_path do%>
+      Nail Shop
+      <% end %>
+    </h1>
+
+    <ul id="nav-links" class="navbar__list" role='navigation'>
+      <% if current_user %>
+        <li class="navbar__list--item">
+          <%= link_to (edit_user_registration_path) do%>
+          <%= current_user.first_name != '' ? current_user.first_name : current_user.email %>
+          <% end %>
+        </li>
+        <li class="navbar__list--item">
+          <%= react_component 'Cart', {orderCount: get_order_count, user: current_user.id} %>
+        </li>
+        <li class="navbar__list--item">
+          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+        </li>
+      <% else %>
+        <li class="navbar__list--item">
+          <%= link_to "Login", new_user_session_path %>
+        </li>
+        <li class="navbar__list--item">
+          <%= link_to "Sign Up", new_user_registration_path %>
+        </li>
+      <% end %>
+      <li class="navbar__list--item">
+        <%= link_to "Products", products_path %>
+      </li>
+    </ul>
+  </div>
+</nav>

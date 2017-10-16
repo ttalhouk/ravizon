@@ -1,0 +1,223 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product-modal {
+  z-index: 200
+}
+
+.product-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &--header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $space;
+    @include desktop {
+      flex-direction: row;
+    };
+    .product-list--title {
+      flex: 1;
+      @include desktop {
+        margin: 0;
+      };
+
+    }
+    .search-bar {
+      border-radius: 1rem;
+      border: 1px solid lighten($pink, 30%);
+      height: 3rem;
+      width: 30rem;
+      height: 3rem;
+    }
+  }
+
+  &--showcase {
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: center;
+    height: 80vh;
+    overflow: scroll;
+  }
+  &--item {
+    margin: $space;
+    position: relative;
+    border: 1px solid #dddddd;
+    box-shadow: $default-shadow;
+    width: 30rem;
+    // can remove if fix image aspect ratio
+    // height: 30rem;
+    &-qty {
+      bottom: 10px;
+      background-color: $pink;
+      box-shadow: $default-shadow;
+      color: #fff;
+      left: -10px;
+      padding: .5rem;
+      position: absolute;
+      &:after {
+        content: '';
+        position: absolute;
+        height:0px;
+        width: 0px;
+        left:0;
+        top: -10px;
+        border-left: 5px solid transparent;
+        border-top: 5px solid transparent;
+        border-right: 5px solid darken($pink, 20%);
+        border-bottom: 5px solid darken($pink, 20%);
+      }
+    }
+  }
+  &--item-link {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 400;
+      padding: $space;
+      margin-bottom: 0;
+    }
+    img {
+      padding: $space;
+      width: 100%;
+    }
+  }
+}
+
+.product-modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.7);
+
+  &--close-button {
+    border-radius: .5rem;
+    cursor: pointer;
+    position: absolute;
+    right: -3.5rem;
+    top: -3.5rem;
+    padding: .6rem 1rem;
+    color: #fff;
+    background-color: $pink;
+  }
+  &--window {
+
+    background: $body-bg-color;
+    border-radius: 1rem;
+    border: 1px solid darken($pink, 30%);
+    box-shadow: 2px 2px 10px 0px transparentize($pink, .7);
+    min-width: 60%;
+    max-width: 80%;
+    max-height: 85vh;
+    padding: $space;
+    position: relative;
+    z-index: 9999;
+    @include desktop {
+      min-width: 40%;
+      max-width: 70%;
+    };
+  }
+  &--backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 9998;
+  }
+  &--content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &--controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &--image {
+    align-self: center;
+    box-shadow: $default-shadow;
+    height: auto;
+    // need to set image aspect ratio
+    width: 100%;
+    max-width: 450px;
+    max-height: 250px;
+  }
+  &--details {
+    flex: 1;
+    position: relative;
+    margin-bottom: .5rem;
+    max-width: 100%;
+    max-height: 35vh;
+    overflow: scroll;
+    @include desktop{
+      max-width: 500px;
+      max-height: 30vh;
+    };
+    h2{
+      font-size: $large-font-size;
+      font-weight: 300;
+      margin: 0;
+      padding: $space;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    p {
+      line-height: 150%;
+    }
+  }
+}
+
+.product--image {
+  max-height: 30rem;
+  box-shadow: $default-shadow;
+  @include page-break{
+    max-width: 50%;
+  };
+}
+
+.product--controls {
+  border: 1px solid $pink;
+  border-radius: .6rem;
+  box-shadow: $default-shadow;
+
+  min-width: 50%;
+  margin: $large-space;
+  padding: $space;
+  @include desktop {
+    min-width: 40%
+  };
+  > h2 {
+    text-align: center;
+  }
+  > p {
+    line-height: 120%;
+    margin-bottom: .5rem;
+    text-align: center;
+    @include desktop {
+      text-align: left;
+    };
+  }
+  &:last-child .button {
+    margin: .5rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

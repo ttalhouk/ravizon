@@ -1,0 +1,22 @@
+.button {
+  cursor:pointer;
+  box-shadow: $default-shadow;
+  font-size: $base-font-size;
+  padding: .6rem 1.2rem;
+  border: 1px solid;
+  text-decoration: none;
+  outline: none;
+
+  &--order {
+    @include style-button($pink);
+  }
+  &--link {
+    @include style-button;
+  }
+  &--action {
+    @include style-button($purple);
+  }
+  &--remove {
+    @include style-button(#B71C1C);
+  }
+}

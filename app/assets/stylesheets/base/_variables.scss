@@ -1,0 +1,34 @@
+// colors
+
+$success-color:#B2FF59;
+$error-color: #F44336;
+$pink: #E91E63;
+$purple: #6A1B9A;
+$nav-font-color: #e6e6e6;
+
+//spacing
+$small-space: .7rem;
+$space: 1.4rem;
+$large-space: 2.8rem;
+$site-max-width: 100rem;
+
+// body
+
+$body-bg-color: #fafafa;
+$body-default-color: #333333;
+
+// font sizes
+$base-font-size: 1.4rem;
+$large-font-size: 2.2rem;
+$xl-font-size: 3.4rem;
+$hero-font-size: 6.8rem;
+
+// fonts
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+$lobster: 'Lobster', cursive;
+$site-font-default: 'Lato', Helvetica, Arial, sans-serif;
+
+// shadows
+
+$default-shadow: 1px 1px 5px 0px transparentize(#333, .3);

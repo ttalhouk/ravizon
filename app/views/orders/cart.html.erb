@@ -1,0 +1,59 @@
+<div class="order-list">
+  <% if flash[:error].present? %>
+    <div id="error_explanation">
+      <p><%= flash[:error] %></p>
+    </div>
+  <% end %>
+  <div class="order-list--header">
+    <h2 class="order-list--title">
+      <%= current_user.email%>'s Checkout
+    </h2>
+  </div>
+  <% @orders.each do |order| %>
+  <div class='order-list--item'>
+    <div class='order-list--item-details'>
+      <h3><%= order.product.name %></h3>
+    </div>
+    <div class='order-list--item-controls'>
+      <span class="order-list--item-price">
+        <%= number_to_currency(order.product.price) %> x
+      </span>
+      <span class="order-list--item-final-qty">
+        <%= order.qty %>
+      </span>
+      <span class="order-list--item-subtotal">
+          = <%= number_to_currency(order.qty * order.product.price) %>
+      </span>
+    </div>
+  </div>
+  <% end %>
+  <div class="order-list--purchase">
+    <p>
+      * For Demo only. Upon completion form for checkout here.
+    </p>
+    <br />
+    <!-- <%= link_to "Purchase", purchase_user_orders_path(current_user), method: :patch, class:"button button--order"
+    %> -->
+
+    <%= form_tag purchase_user_orders_path(current_user) do %>
+      <!-- <article>
+
+        <label class="amount">
+          <span>Amount: $5.00</span>
+        </label>
+      </article> -->
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button button button--order"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-description="<%= current_user.email%>'s Order"
+        data-amount="<%= @orders.reduce(0) {|total, order| total + (order.qty * order.product.price * 100)} %>"
+        data-name="Nail Shop"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-zip-code=true
+        data-email="<%= current_user.email %>"
+        data-billing-address= true
+        data-shipping-address= true
+        data-locale="auto">
+      </script>
+    <% end %>
+  </div>
+</div>

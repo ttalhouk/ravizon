@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+
+body {
+  font-size: $base-font-size;
+  color:$body-default-color;
+  font-family: $site-font-default;
+  background-color: $body-bg-color;
+}
+
+
+h1 {
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+}
+
+h2 {
+  font-size: $large-font-size;
+  margin-bottom: $space;
+}
+
+
+main.space {
+  @include desktop{
+    padding: 6rem $space 0 $space;
+  };
+
+}
+nav {
+  position: relative;
+  z-index: 100;
+}
+
+.page--wrapper {
+  width: 100%;
+  margin: 1rem auto 0 auto;
+  @include desktop{
+    width: 80vw;
+  };
+}
+
+.page--title {
+  position: relative;
+  font-size: $xl-font-size;
+  text-align: center;
+  margin-bottom: 3rem;
+  &:after{
+    content: '';
+    background-color: $pink;
+    bottom: -10px;
+    height: 2px;
+    left: 40%;
+    position: absolute;
+    width: 20%;
+  }
+}
+
+.page--content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &-upper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space;
+    @include page-break {
+      flex-direction: row;
+    };
+  }
+  &-lower {
+    padding:$space;
+    width: 100%;
+    @include desktop {
+      padding:0;
+    };
+  }
+}
+
+input, textarea {
+  outline: none;
+  padding: .7rem;
+  font-size: 110%;
+}

@@ -1,0 +1,25 @@
+.status-message {
+  border-radius: 1rem;
+  font-style: italic;
+  padding: $space;
+  position: fixed;
+  top: 7rem;
+  z-index: 9999;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  transition: all .35s ease-in-out;
+  i {
+    margin-left: $space;
+  }
+  &--success {
+    background-color: $success-color;
+  }
+  &--error {
+    background-color: $error-color;
+    color: #fff;
+  }
+  &--close {
+    padding: 0;
+  }
+}

@@ -1,0 +1,36 @@
+.home {
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    background-attachment: fixed;
+
+    &--content{
+      position: absolute;
+      @include vert-center-flex;
+      color: #fff;
+      top: 0;
+      left:0;
+      bottom: 0;
+      right: 0;
+      background-image:linear-gradient(rgba(76, 76, 76, 0.7),rgba(76, 76, 76, 0.7));
+
+      &__title {
+        text-align: center;
+        font-size: $xl-font-size;
+        padding: $large-space;
+        font-family: $lobster;
+        @include desktop{
+          font-size: $hero-font-size;
+        };
+      }
+      &__tag-line {
+        font-size: $base-font-size;
+        padding: $large-space;
+        font-family: $lobster;
+        @include desktop{
+          font-size: $xl-font-size;
+        };
+      }
+    }
+  }
+}

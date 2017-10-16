@@ -1,0 +1,36 @@
+
+<div class='page--wrapper'>
+  <h1 class='page--title'><%= @product.name %></h1>
+  <div class='page--content'>
+    <div class='page--content-upper'>
+      <%= image_tag @product.image.url(:original), class: 'product--image' %>
+      <div class='product--controls'>
+        <h2>Product Details</h2>
+        <p>Price -
+          <%= number_to_currency(@product.price) %>
+        </p>
+        <p>
+          Available Quantity - <%= @product.stock > 10 ? @product.stock : "Only #{@product.stock} left!" %>
+        </p>
+
+        <% if current_user %>
+          <%= button_to "Add to Cart", orders_path, method: :post, params: {product: @product}, class: 'button button--order' %>
+        <% else %>
+          <%= button_to "Login to add to Cart", new_user_session_path, method: :get, class: 'button button--link' %>
+        <% end %>
+      </div>
+    </div>
+    <div class='page--content-lower'>
+      <h2>Product Description:</h2>
+      <p>
+        <%= @product.description %>
+      </p>
+    </div>
+
+  </div>
+  <%= react_component 'ReviewList', {
+    product: @product,
+    user: current_user,
+    reviews: @product.reviews
+    }%>
+</div>

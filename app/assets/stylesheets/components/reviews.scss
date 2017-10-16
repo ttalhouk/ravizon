@@ -1,0 +1,131 @@
+// Place all the styles related to the reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.page--review-section {
+
+}
+.review{
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  // align-items: flex-start;
+
+  .button{
+    margin: $space 0;
+    // flex-grow: 0;
+    margin-left: $space;
+    @include desktop{
+      margin-left: 0;
+    };
+  }
+  &--form {
+
+    // testing
+    position: relative;
+    overflow: hidden;;
+    max-height: 600px;
+    transition: max-height .5s ease-in-out;
+    &.closed{
+      max-height: 0px;
+
+    }
+    p {
+      font-style: italic;
+      font-weight: bold;
+      text-align: center;
+    }
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      @include desktop{
+        align-items: flex-start;
+        justify-content: flex-start;
+      };
+      border: 2px solid $pink;
+      padding: $space;
+      margin: $space;
+      label {
+        font-weight: bold;
+        padding: $space;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        @include desktop {
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+        };
+      }
+      .button {
+        margin-left: 0;
+        @include desktop{
+          margin-left: $space;
+        };
+      }
+    }
+  }
+}
+
+.review--input, .review--textarea {
+  border: 1px solid #c8c8c8;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-top: $space;
+  width: 100%;
+  @include desktop{
+    margin: 0 0 0 $space;
+  };
+  resize: none;
+}
+
+.review--textarea {
+  height: 15rem;
+}
+
+.review--stars {
+  text-align: center;
+  @include desktop{
+    padding-left: $space
+  };
+}
+.review--star {
+  font-size: $xl-font-size;
+  color: $pink;
+}
+
+.review-list{
+  border-top: 3px solid $pink;
+  &--item{
+    padding: $space;
+    &__title {
+      display: inline-block;
+      padding-right: $space;
+      font-size: 2rem;
+      font-style: italic;
+    }
+    &__stars {
+      color: $pink;
+      font-size: 2rem;
+    }
+    &__review {
+      border-left: 2px solid $pink;
+      margin: $space;
+      padding:$space;
+    }
+    &__username {
+      display: inline-block;
+      font-style: italic;
+      font-weight: bold;
+      padding-right: .5rem;
+    }
+    &__timestamp {
+      color:lighten($body-default-color, 20%);
+      font-size: 1rem;
+      font-style: italic;
+    }
+  }
+}

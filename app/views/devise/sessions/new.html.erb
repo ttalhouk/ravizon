@@ -1,0 +1,40 @@
+<%= react_component 'FlashMessages', messages: flash_messages %>
+<div class="login">
+
+  <h2 class="login--title">Log in</h2>
+
+  <% if flash[:notice] %>
+  <div>
+    <p>
+      <%= flash[:notice] %>
+    </p>
+  </div>
+  <% end %>
+
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class:"login--form"}) do |f| %>
+    <div class="field login--input">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true%>
+    </div>
+
+    <div class="field login--input">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off"%>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+    <div class="field login--checkbox">
+      <%= f.check_box :remember_me%>
+      <%= f.label :remember_me%>
+    </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.submit "Log in", class: "button button--action"%>
+    </div>
+  <% end %>
+  <div class="login--links">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

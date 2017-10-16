@@ -1,0 +1,66 @@
+<%= react_component 'FlashMessages', messages: flash_messages %>
+<div class="login">
+  <h2 class="login--title">Edit <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class:"login--edit-form" }) do |f| %>
+  <!-- <%= devise_error_messages! %> -->
+
+  <div class="field login--input">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <div class="field login--input">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: false%>
+  </div>
+  <div class="field login--input">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: false%>
+  </div>
+  <div class="field login--input">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: false%>
+  </div>
+  <div class="field login--input">
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :zip_code, autofocus: false%>
+  </div>
+
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+  <% if current_user.provider != 'facebook'%>
+    <div class="field login--input">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+    <i class="login--info">(leave blank if you don't want to change it)</i>
+    <% if @minimum_password_length %>
+    <em class="login--info"><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+
+    <div class="field login--input">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="field login--input">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+    <i class="login--info">(we need your current password to confirm your changes)</i>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Update", class: "button button--action" %>
+  </div>
+  <% end %>
+  <div class="login--links">
+    <h3 class="login--title">Cancel my account</h3>
+
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'button button--remove' %>
+
+    <%= link_to "Back", :back , class: 'button button--link'%>
+  </div>
+</div>

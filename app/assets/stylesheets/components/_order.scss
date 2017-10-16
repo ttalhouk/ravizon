@@ -1,0 +1,75 @@
+.order-list {
+  &--no-items{
+    text-align: center;
+    font-size: $large-font-size;
+    padding: $space;
+  }
+  &--grand-total {
+    font-size: $large-font-size;
+    font-weight: bold;
+    margin-bottom: $space;
+  }
+  &--header{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:$space;
+    @include desktop{
+      flex-direction: row;
+      justify-content: space-between;
+    };
+  }
+  &--title {
+    flex:1;
+  }
+
+  &--item {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding:$space;
+    @include desktop{
+      width: 70%
+    };
+    &-details {
+      flex:1;
+    }
+    &-price{
+      display: inline-block;
+      margin-right: $small-space;
+      width: 8rem;
+      text-align: right;
+    }
+    &-qty {
+      width:5rem;
+      padding: .5rem;
+      outline: none;
+      border: 1px solid #ababab;
+      margin-right: $small-space;
+      border-radius: .8rem;
+    }
+    &-final-qty {
+      width:5rem;
+      padding: .5rem;
+      margin-right: $small-space;
+    }
+    &-form {
+      display: inline-block;
+    }
+    &-subtotal {
+      display: inline-block;
+      margin-right: $small-space;
+      width: 8rem;
+    }
+    &-remove {
+      font-size: $large-font-size;
+      color: $error-color;
+    }
+  }
+  &--purchase{
+    text-align: center;
+  }
+
+}
