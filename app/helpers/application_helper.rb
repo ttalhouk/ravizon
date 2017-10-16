@@ -13,6 +13,7 @@ module ApplicationHelper
       {
         title: review.title,
         body: review.body,
+        rating: review.rating,
         updated_at: review.updated_at,
         reviewer: review.user.first_name
       }
