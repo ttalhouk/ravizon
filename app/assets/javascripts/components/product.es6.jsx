@@ -63,7 +63,7 @@ class Product extends React.Component {
 
   render () {
     const {id, name, description, stock, url} = this.props.product
-    const price = numeral(this.props.product.price).format('$0,0.00')
+    const price = numeral(this.props.product.price).format('0,0') + " Rupees"
     return (
       <div className= "product-list--item">
         <div onClick={this.openModal.bind(this)} className="product-list--item-link">

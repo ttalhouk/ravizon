@@ -7,7 +7,7 @@
       <div class='product--controls'>
         <h2>Product Details</h2>
         <p>Price -
-          <%= number_to_currency(@product.price) %>
+          <%= number_to_currency(@product.price, unit: '', precision: 0) %> Rupees
         </p>
         <p>
           Available Quantity - <%= @product.stock > 10 ? @product.stock : "Only #{@product.stock} left!" %>

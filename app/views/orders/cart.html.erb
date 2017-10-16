@@ -16,21 +16,21 @@
     </div>
     <div class='order-list--item-controls'>
       <span class="order-list--item-price">
-        <%= number_to_currency(order.product.price) %> x
+        <%= number_to_currency(order.product.price, unit: '') %> x
       </span>
       <span class="order-list--item-final-qty">
         <%= order.qty %>
       </span>
       <span class="order-list--item-subtotal">
-          = <%= number_to_currency(order.qty * order.product.price) %>
+          = <%= number_to_currency(order.qty * order.product.price, unit: '', precision: 0) %>
       </span>
     </div>
   </div>
   <% end %>
   <div class="order-list--purchase">
-    <p>
+    <!-- <p>
       * For Demo only. Upon completion form for checkout here.
-    </p>
+    </p> -->
     <br />
     <!-- <%= link_to "Purchase", purchase_user_orders_path(current_user), method: :patch, class:"button button--order"
     %> -->

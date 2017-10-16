@@ -137,7 +137,7 @@ class OrdersList extends React.Component {
     if (!this.state.fulfilled){
       return (
         <div className="order-list--grand-total">
-          Grand Total: {numeral(total).format('$0,0.00')}
+          Grand Total: {numeral(total).format('0,0')} Rupees
         </div>);
     } else {
       return

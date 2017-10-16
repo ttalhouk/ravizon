@@ -31,7 +31,7 @@ class Order extends React.Component {
   }
   renderSubtotal(){
     let total = this.state.updatedQuantity * this.props.product.price;
-    return numeral(total).format('$0,0.00');
+    return numeral(total).format('0,0') + " Rupees";
   }
   renderQty(){
     if (!this.props.fulfilled) {
@@ -81,7 +81,7 @@ class Order extends React.Component {
         </div>
         <div className='order-list--item-controls'>
           <span className="order-list--item-price">
-            {numeral(product.price).format('$0,0.00')} x
+            {numeral(product.price).format('0,0')} rupees x
           </span>
           {this.renderQty()}
           <span className="order-list--item-subtotal">
